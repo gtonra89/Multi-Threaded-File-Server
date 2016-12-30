@@ -14,8 +14,9 @@ public class Setup {
 		Context ctx = new Context();
 		ContextParser cp = new ContextParser(ctx);
 		cp.init();
-		
 		System.out.println(ctx);
+		System.out.println("xml file parsed");
+		
 		MenuSystem myMenuSystem = new MenuSystem();
 		myMenuSystem.menuSelection();
 	}

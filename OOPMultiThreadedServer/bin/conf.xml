@@ -12,9 +12,7 @@
 	can suffice, eg. an *.ini or *.props file. XML documents however, are highly structured and
 	make the parsing of such information easier than working with other formats. 
 -->
-<conf username="gmit-sw2016" host="127.0.0.1 "port="7777" >
- <server-host>127.0.0.1</server-host>
- <server-port>7777</server-port>
- <download-dir>./downloads/</download-dir>
- <driver>ie.gmit.sw.MyDBDriverImpl</driver>
-</conf>
+<client-config>
+	 <server-details username="gmit-sw2016" host="127.0.0.1" port="7777" ></server-details>
+	 <download-dir>./downloads/</download-dir>
+</client-config>

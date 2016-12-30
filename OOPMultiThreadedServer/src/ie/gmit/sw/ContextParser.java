@@ -38,36 +38,25 @@ public class ContextParser {
 			if (next instanceof Element){ //Check if it is an element node. There are 12 different types of Node
 				Element e = (Element) next; //Cast the general node to an element node
 				
-				if (e.getNodeName().equals("database")){ //Check if it is the element <database>
+				if (e.getNodeName().equals("server-details")){ //Check if it is the element <database>
 					NamedNodeMap atts = e.getAttributes(); //Get the attributes as a map of name/value pairs
 					
 					for (int j = 0; j < atts.getLength(); j++){ //Look over the attributes. This is similar to looping over a ket set in a Map
-						if (atts.item(j).getNodeName().equals("host")){ //If host="127.0.0.1"
+						if (atts.item(j).getNodeName().equals("username")){ //If host="127.0.0.1"
+							ctx.setUsername(atts.item(j).getNodeValue()); //Update the contex object
+						}
+						else if (atts.item(j).getNodeName().equals("host")){ //If host="127.0.0.1"
 							ctx.setHost(atts.item(j).getNodeValue()); //Update the contex object
-						}else if (atts.item(j).getNodeName().equals("port")){ //Any port in a storm...
+						}
+						else if (atts.item(j).getNodeName().equals("port")){ //Any port in a storm...
 							ctx.setPort(Integer.parseInt(atts.item(j).getNodeValue())); //Update the contex object
-						}else if (atts.item(j).getNodeName().equals("schema")){ //Check for the schema
-							ctx.setSchema(atts.item(j).getNodeValue()); //Update the contex object
 						}
 					}
 					
-				}else if (e.getNodeName().equals("driver")){ 
-					/* The XML document contains the element <driver>:
-					 * 		<driver>ie.gmit.sw.MyDBDriverImpl</driver>
-					 * The text "ie.gmit.sw.MyDBDriverImpl" is just parseable character data (PCDATA) and is contained
-					 * as a child node (a text node) of the element node "driver".  
-					 */
-					
-					String driverClass = e.getFirstChild().getNodeValue(); //Read the text ie.gmit.sw.MyDBDriverImpl as a String
-					
-					/* Class.forName(...) invokes the class loader and asks it to check its CLASSPATH variable for the
-					 * class called ie.gmit.sw.MyDBDriverImpl. If the class loader cannot find the class, it will throw a
-					 * ClassNotFoundException. Otherwise, it will use the method newInstance() of the class java.lang.Class
-					 * to invoke the null constructor of the class ie.gmit.sw.MyDBDriverImpl. This will result in an
-					 * instance of ie.gmit.sw.MyDBDriverImpl being created and assigned the context.
-					 */
-					Driveable d = (Driveable) Class.forName(driverClass).newInstance();
-					ctx.setDriver(d);
+				}
+				else if (e.getNodeName().equals("download-dir")){ 
+					String downloadDir = e.getFirstChild().getNodeValue(); //Read the text ie.gmit.sw.MyDBDriverImpl as a String
+					ctx.setDir(downloadDir);
 				}
 			}
 		}		

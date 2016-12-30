@@ -8,10 +8,11 @@ package ie.gmit.sw;
  */
 public class Context {
 	public static final String CONF_FILE="conf.xml";
+	private String username;
 	private String host;
 	private int port;
-	private String schema;
-	private Driveable driver;
+	private String dir;
+	
 	
 	public Context() {
 		super();
@@ -33,24 +34,24 @@ public class Context {
 		this.port = port;
 	}
 
-	public String getSchema() {
-		return schema;
-	}
-
-	public void setSchema(String schema) {
-		this.schema = schema;
-	}
-
-	public Driveable getDriver() {
-		return driver;
-	}
-
-	public void setDriver(Driveable driver) {
-		this.driver = driver;
-	}
-
 	@Override
 	public String toString() {
-		return "Context [host=" + host + ", port=" + port + ", schema=" + schema + ", driver=" + driver + "]";
+		return "Context [username=" + username + ", host=" + host + ", port=" + port + ", dir=" + dir + "]";
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getDir() {
+		return dir;
+	}
+
+	public void setDir(String dir) {
+		this.dir = dir;
 	}
 }
